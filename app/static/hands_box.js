@@ -33,7 +33,7 @@ function onResults(results) {
   canvasCtx.font = "20px Arial";
   canvasCtx.fillText("Choose Your Age=" + age, 10, 20);
   canvasCtx.fillText("Choose Your Gender = " + gender, 10, 200);
-  canvasCtx.fillText("(0=Male, 1=Female)", 10, 220);
+  canvasCtx.fillText("(0 = Male, 1 = Female)", 10, 220);
   canvasCtx.fillText("Submit ", 360, 280);
   canvasCtx.font = "40px Arial";
   canvasCtx.fillText("+", 75, 100);
