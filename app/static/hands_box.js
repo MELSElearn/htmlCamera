@@ -1,9 +1,12 @@
-const videoElement = document.getElementsByClassName('input_video')[0];
-const canvasElement = document.getElementsByClassName('output_canvas')[0];
+const videoElement = document.getElementById('input_video');
+const canvasElement = document.getElementById('output_canvas');
 const canvasCtx = canvasElement.getContext('2d');
 videoElement.setAttribute('autoplay', '');
 videoElement.setAttribute('muted', '');
 videoElement.setAttribute('playsinline', '');
+
+const canvasElement2 = document.getElementById("output_canvas2");
+const canvasCtx2 = canvasElement2.getContext('2d');
 
 var age = 0;
 var gender = 0;
@@ -33,7 +36,7 @@ function onResults(results) {
   canvasCtx.font = "20px Arial";
   canvasCtx.fillText("Choose Your Age=" + age, 10, 20);
   canvasCtx.fillText("Choose Your Gender = " + gender, 10, 200);
-  canvasCtx.fillText("(0 = Male, 1 = Female)", 10, 220);
+  canvasCtx.fillText("(0=Male, 1=Female)", 10, 220);
   canvasCtx.fillText("Submit ", 360, 280);
   canvasCtx.font = "40px Arial";
   canvasCtx.fillText("+", 75, 100);
@@ -104,6 +107,16 @@ function onResults(results) {
   }
 }
 
+function onResults2(results) {
+  canvasCtx2.save();
+  canvasCtx2.translate(canvasElement2.width, 0);
+  canvasCtx2.scale(-1, 1);
+  canvasCtx2.clearRect(0, 0, canvasElement2.width, canvasElement2.height);
+  canvasCtx2.drawImage(
+      results.image, 0, 0, canvasElement2.width, canvasElement2.height);
+  canvasCtx2.restore();
+}
+
 const hands = new Hands({locateFile: (file) => {
   return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
 }});
@@ -117,7 +130,10 @@ hands.onResults(onResults);
 
 const camera = new Camera(videoElement, {
   onFrame: async () => {
-    await hands.send({image: videoElement});
+    //flip the video content and load into output_canvas2 before process to detect finger
+    onResults2({image: videoElement});
+    //use the flipped image in output_canvas2 to detect finger
+    await hands.send({image: canvasElement2});
   },
   width: 480,
   height: 480
