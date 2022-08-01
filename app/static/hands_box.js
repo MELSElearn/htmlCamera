@@ -34,10 +34,11 @@ function onResults(results) {
     }
   }
   canvasCtx.font = "20px Arial";
-  canvasCtx.fillText("Choose Your Age=" + age, 10, 20);
-  canvasCtx.fillText("Choose Your Gender = " + gender, 10, 200);
+  canvasCtx.fillText("Enter Your Age :" + age, 10, 20);
+  canvasCtx.fillText("Select Your Gender : " + gender, 10, 200);
   canvasCtx.fillText("(0=Male, 1=Female)", 10, 220);
-  canvasCtx.fillText("Submit ", 360, 280);
+  canvasCtx.fillText("Press the button:", 10, 360);
+  canvasCtx.fillText("Submit ", 200, 400);
   canvasCtx.font = "40px Arial";
   canvasCtx.fillText("+", 75, 100);
   canvasCtx.fillText("-", 225, 100);
@@ -88,13 +89,13 @@ function onResults(results) {
 	  cv.rectangle(src, new cv.Point(200, 230), new cv.Point(300, 330), [255, 0, 0, 255], 4); //RGBA - A for alpha
   }
 
-  if (cx > 350 && cx < 450 && cy > 230 && cy<330 && counter==1)
+  if (cx > 180 && cx < 280 && cy > 350 && cy<450 && counter==1)
   {
     document.getElementById("myForm").submit();
-	  cv.rectangle(src, new cv.Point(350, 230), new cv.Point(450, 330), [0, 255, 0, 255], -1); //RGBA - A for alpha
+	  cv.rectangle(src, new cv.Point(180, 350), new cv.Point(280, 450), [0, 255, 0, 255], -1); //RGBA - A for alpha
   }else
   {
-	  cv.rectangle(src, new cv.Point(350, 230), new cv.Point(450, 330), [255, 0, 0, 255], 4); //RGBA - A for alpha
+	  cv.rectangle(src, new cv.Point(180, 350), new cv.Point(280, 450), [255, 0, 0, 255], 4); //RGBA - A for alpha
   }
   
   cv.imshow('output_canvas', src);
@@ -139,3 +140,4 @@ const camera = new Camera(videoElement, {
   height: 480
 });
 camera.start();
+
