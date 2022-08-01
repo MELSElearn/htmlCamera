@@ -139,4 +139,3 @@ const camera = new Camera(videoElement, {
   height: 480
 });
 camera.start();
-
